@@ -54,8 +54,14 @@ function checkTyping() {
     const timeTaken = (new Date() - startTime) / 1000;
     const words = original.split(" ").length;
     const speed = Math.round((words / timeTaken) * 60);
+
     typingBox.disabled = true;
     resultBox.classList.remove("hidden");
     resultBox.innerHTML = `✅ Completed! <br>⏱ Time: <b>${timeTaken.toFixed(2)}s</b> | ⚡ Speed: <b>${speed} WPM</b>`;
+
+    // 🎉 Popup Message
+    setTimeout(() => {
+      alert(`🎉 Congratulations! Test Completed.\n\nSpeed: ${speed} WPM\nTime: ${timeTaken.toFixed(2)} seconds`);
+    }, 500);
   }
 }
