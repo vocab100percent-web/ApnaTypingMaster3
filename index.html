@@ -3,75 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Apna Typing Master — Test</title>
+  <title>Apna Typing Master — Home</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background: linear-gradient(180deg, #f9fafb, #e0f2fe);
+      background: linear-gradient(180deg, #f0f9ff, #e0f2fe);
       font-family: 'Inter', sans-serif;
-    }
-    .typing-box {
-      font-size: 18px;
-      line-height: 1.6;
-      padding: 15px;
-      border-radius: 10px;
-      background: white;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
-      min-height: 150px;
-    }
-    .mangal {
-      font-family: 'Mangal', sans-serif;
-    }
-    .krutidev {
-      font-family: 'Kruti Dev 010', sans-serif;
     }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-6">
-  <div class="w-full max-w-xl bg-white p-6 rounded-2xl shadow-xl">
-    <h1 class="text-2xl font-bold text-center mb-6 text-blue-600">🧠 Apna Typing Master</h1>
+<body class="min-h-screen flex flex-col items-center justify-center text-center px-6">
+  <div class="max-w-3xl w-full">
+    <img src="assets/logo.png" alt="Apna Typing Master" class="mx-auto w-24 mb-4">
+    <h1 class="text-4xl font-bold text-blue-600 mb-2">🧠 Apna Typing Master</h1>
+    <p class="text-gray-600 text-lg mb-8">Practice English & Hindi Typing for Government Exams — UPSSSC, SSC, High Court & More</p>
 
-    <label for="language" class="block text-lg font-semibold mb-2">Language / Font</label>
-    <select id="language" class="w-full p-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400">
-      <option value="english">English</option>
-      <option value="hindi-inscript">Hindi (Inscript – Mangal)</option>
-      <option value="hindi-krutidev">Hindi (Kruti Dev)</option>
-    </select>
-
-    <div class="flex gap-4 mt-6">
-      <button id="startBtn" class="flex-1 bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600">Start Test</button>
-      <button id="practiceBtn" class="flex-1 bg-gray-200 text-gray-700 py-2 rounded-lg font-semibold hover:bg-gray-300">Practice</button>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+      <div class="bg-white shadow-md rounded-xl p-4">
+        <h3 class="font-semibold text-xl text-blue-600 mb-2">English</h3>
+        <p class="text-gray-600">Simple English typing test for accuracy and speed improvement.</p>
+      </div>
+      <div class="bg-white shadow-md rounded-xl p-4">
+        <h3 class="font-semibold text-xl text-blue-600 mb-2">Hindi (Inscript)</h3>
+        <p class="text-gray-600">Type using Mangal font — official Inscript layout for exams.</p>
+      </div>
+      <div class="bg-white shadow-md rounded-xl p-4">
+        <h3 class="font-semibold text-xl text-blue-600 mb-2">Hindi (Kruti Dev)</h3>
+        <p class="text-gray-600">Practice traditional Remington layout (Kruti Dev 010).</p>
+      </div>
     </div>
 
-    <div id="typingBox" class="typing-box mt-6">
-      Select your language and click “Start Test” to begin typing.
-    </div>
+    <a href="typing-test.html" 
+       class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold text-lg transition">
+      🚀 Start Typing Test
+    </a>
+
+    <p class="text-sm text-gray-500 mt-8">Made with ❤️ in India — © 2025 Apna Typing Master</p>
   </div>
-
-  <script>
-    const typingBox = document.getElementById('typingBox');
-    const languageSelect = document.getElementById('language');
-
-    const sampleTexts = {
-      english: "Practice makes a man perfect. Keep typing accurately and steadily.",
-      'hindi-inscript': "यह एक हिंदी इंस्क्रिप्ट टाइपिंग अभ्यास का उदाहरण है। निरंतर अभ्यास से गति और शुद्धता आती है।",
-      'hindi-krutidev': "esjk uke dqekj gS vkSj ;g dsoy ,d iz;ksx gS ftlls vki vius fy[kus dh 'kfDr c<k ldrs gSaA"
-    };
-
-    document.getElementById('startBtn').addEventListener('click', () => {
-      const selected = languageSelect.value;
-      typingBox.textContent = sampleTexts[selected];
-
-      // Reset font
-      typingBox.classList.remove('mangal', 'krutidev');
-
-      // Apply font style
-      if (selected === 'hindi-inscript') {
-        typingBox.classList.add('mangal');
-      } else if (selected === 'hindi-krutidev') {
-        typingBox.classList.add('krutidev');
-      }
-    });
-  </script>
 </body>
 </html>
