@@ -1,56 +1,167 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Apna Typing Master — Typing Test</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-@font-face {
-  font-family: 'Mangal';
-  src: url('assets/fonts/Mangal.ttf') format('truetype');
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Test</title>
 
-@font-face {
-  font-family: 'Kruti Dev 010';
-  src: url('assets/fonts/KrutiDev010.ttf') format('truetype');
-}
-</style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #e7ecff;
+        }
 
+        .container {
+            width: 60%;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px #b2b8d4;
+            margin-top: 40px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #3a3a8c;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            align-items: center;
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        textarea {
+            height: 130px;
+            resize: none;
+        }
+
+        .passage-box {
+            width: 30%;
+        }
+
+        .timer-box {
+            width: 30%;
+            text-align: right;
+            font-size: 22px;
+            font-weight: bold;
+            color: #d70000;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 25px;
+            margin: 5px;
+            background: #1f57ff;
+            color: white;
+            font-size: 17px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-indigo-100 to-blue-50 flex flex-col items-center justify-center">
 
-  <div class="w-full max-w-3xl bg-white/70 backdrop-blur-md shadow-lg rounded-2xl p-8 text-center">
-    <h1 class="text-3xl font-bold mb-4 text-indigo-800">Typing Test</h1>
+<body>
 
-    <!-- Font Selection -->
-    <div class="mb-6">
-      <label for="fontSelect" class="block text-lg font-medium mb-2">Choose Font / Language:</label>
-      <select id="fontSelect" class="border border-gray-300 rounded-md p-2 text-lg">
-        <option value="english">English</option>
-        <option value="hindi-inscript">Hindi (Inscript - Mangal)</option>
-        <option value="hindi-krutidev">Hindi (Kruti Dev)</option>
-      </select>
+    <div class="container">
+
+        <h2>Typing Test</h2>
+
+        <!-- ✅ Passage & Timer Row -->
+        <div class="row">
+
+            <!-- ✅ Passage List -->
+            <div class="passage-box">
+                <label><b>Select Passage:</b></label>
+                <select id="passageSelect">
+                    <option value="1">Passage 1</option>
+                    <option value="2">Passage 2</option>
+                    <option value="3">Passage 3</option>
+                    <option value="4">Passage 4</option>
+                </select>
+            </div>
+
+            <!-- ✅ Start Message (Center) -->
+            <div style="width: 40%; text-align:center; font-size:18px; color:#444;">
+                Click "<b>Start Test</b>" to begin typing practice.
+            </div>
+
+            <!-- ✅ Timer (Right Side) -->
+            <div class="timer-box">
+                Time: <span id="timer">0</span>
+            </div>
+        </div>
+
+        <!-- ✅ Typing Box -->
+        <textarea id="typeBox" placeholder="Start typing here..." disabled></textarea>
+
+        <!-- ✅ Buttons -->
+        <div class="buttons">
+            <button onclick="startTest()">Start Test</button>
+            <button onclick="window.location.href='index.html'">Home</button>
+        </div>
+
     </div>
 
-    <!-- Example Text -->
-    <div id="testText" class="border rounded-lg bg-gray-50 text-lg p-4 mb-4 text-gray-800">
-      Click "Start Test" to begin typing practice.
-    </div>
 
-    <!-- Typing Input Box -->
-    <textarea id="typingBox" class="w-full border border-gray-300 rounded-lg p-3 text-lg focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4" rows="4" placeholder="Start typing here..." disabled></textarea>
+    <!-- ✅ FULL WORKING JAVASCRIPT -->
+    <script>
 
-    <!-- Buttons -->
-    <div class="flex justify-center gap-4">
-      <button id="startTestBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow">Start Test</button>
-      <a href="index.html" class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg shadow">Home</a>
-    </div>
+        let timeLeft = 60;      // default 60 sec
+        let timerInterval;
 
-    <!-- Results -->
-    <div id="resultBox" class="mt-6 text-lg font-medium text-gray-700 hidden"></div>
-  </div>
+        function startTest() {
 
-  <script src="scripts/main.js"></script>
+            // Disable select while test is running
+            document.getElementById("passageSelect").disabled = true;
+
+            // Enable typing box
+            let box = document.getElementById("typeBox");
+            box.disabled = false;
+            box.focus();
+
+            // Reset time
+            timeLeft = 60;
+
+            document.getElementById("timer").innerText = timeLeft;
+
+            // Clear old timer
+            clearInterval(timerInterval);
+
+            // Start new timer
+            timerInterval = setInterval(() => {
+                document.getElementById("timer").innerText = timeLeft;
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(timerInterval);
+                    box.disabled = true;
+                    alert("⏳ Time is over!");
+                }
+
+            }, 1000);
+        }
+
+    </script>
+
 </body>
+
 </html>
